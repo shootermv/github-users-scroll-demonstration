@@ -1,0 +1,16 @@
+.example-viewport {
+  height: 500px;
+  width: 400px;
+  border: 1px solid black;
+}
+
+.avatar {
+  height: 30px;
+}
+.example-item{
+  display:flex;
+}
+.example-item div{
+  width:120px;
+  margin:10px;
+}

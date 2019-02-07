@@ -1,0 +1,12 @@
+<cdk-virtual-scroll-viewport itemSize="10" class="example-viewport">
+  <div *cdkVirtualFor="let item of ds" class="example-item">
+    <div>{{item?.login || 'loading'}}</div>
+    <div><img class="avatar" src={{item?.avatar_url}}/></div>
+    <div><requests-count [user]="item?.login"></requests-count></div>
+  </div>
+</cdk-virtual-scroll-viewport>
+
+
+<!-- Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
