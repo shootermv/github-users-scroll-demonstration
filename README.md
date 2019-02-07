@@ -1,7 +1,8 @@
 # Angular7 example that demonstrates usage of cdk-virtual-scroll in action
-* More users loaded when you scrol down
-* Each requests brings 10
-* Once brought - users are cached  
+* More github users loaded when you scrol down
+* Each request brings 10 users
+* Once brought - users are cached 
+* The repos number of each user brought with different request
 
 # How To Use
 * get github access token (github.com/your-name => profile dropdown => settings => developer settings => access token)
