@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, concatMap, mergeMap, toArray } from 'rxjs/operators';
 
 import { HttpClient,  HttpErrorResponse } from '@angular/common/http';
 import { Observable} from 'rxjs';
+import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,13 +13,17 @@ export class DataService {
   constructor(private http: HttpClient) { }
   
   getData(since) {
-     return this.getUsers(since)
-       .pipe(
-         map(users => users)
-       )
-
-  }
-
+    return this.getUsers(since)
+      .pipe(
+        concatMap(users => from(users)),
+        mergeMap((user) => {
+           return this.getReposCount(user.login).pipe(
+             map(count => ({login: user.login,avatar: user.avatar_url, count}))
+           );          
+        }),
+        toArray()
+      )
+ }
   getReposCount(user) : Observable<number> {   
     return this.http.get<any>(`https://api.github.com/users/${user}/repos?per_page=10000&access_token=${this.token}`)
       .pipe(

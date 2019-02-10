@@ -21,7 +21,7 @@ export class CdkVirtualScrollDataSourceExample {
 export class MyDataSource extends DataSource<string | undefined> {
   private length = 100000;
   private pageSize = 10;
-  private cachedData = Array.from<string>({length: this.length});
+  private cachedData = Array.from<{ login: any; avatar: any; count: number; }>({length: this.length});
   private fetchedPages = new Set<number>();
   private dataStream = new BehaviorSubject<(any | undefined)[]>(this.cachedData);
   private subscription = new Subscription();
@@ -59,8 +59,8 @@ export class MyDataSource extends DataSource<string | undefined> {
     this.fetchedPages.add(page);
 
     this.dataService.getData(page * this.pageSize).subscribe(data => { 
-      this.cachedData.splice(page * this.pageSize, this.pageSize,
-          ...data);
+      this.cachedData.splice(page * this.pageSize, this.pageSize, ...data);
+          
       this.dataStream.next(this.cachedData);
     });
   }

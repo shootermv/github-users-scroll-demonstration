@@ -1,8 +1,8 @@
 <cdk-virtual-scroll-viewport itemSize="10" class="example-viewport">
   <div *cdkVirtualFor="let item of ds" class="example-item">
     <div>{{item?.login || 'loading'}}</div>
-    <div><img class="avatar" src={{item?.avatar_url}}/></div>
-    <div><requests-count [user]="item?.login"></requests-count></div>
+    <div><img class="avatar" src={{item?.avatar}}/></div>
+    <div>{{item?.count}}</div>
   </div>
 </cdk-virtual-scroll-viewport>
 
